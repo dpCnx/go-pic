@@ -23,7 +23,7 @@ func init() {
 		// 创建一个将debug级别以上的日志输出到终端的配置信息
 		zapcore.NewCore(encoder, zapcore.AddSync(os.Stderr), level),
 		// 将error级别以上的日志输出到err文件
-		zapcore.NewCore(encoder, errWriteSyncer, zapcore.ErrorLevel),
+		zapcore.NewCore(encoder, errWriteSyncer, zapcore.InfoLevel),
 	)
 
 	logger := zap.New(core, zap.AddCaller()) // 根据上面的配置创建logger

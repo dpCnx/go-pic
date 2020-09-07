@@ -1,0 +1,42 @@
+definitions:
+  models.ResponseData:
+    properties:
+      code:
+        type: integer
+      data:
+        type: object
+      message:
+        type: string
+    type: object
+info:
+  contact: {}
+  license: {}
+paths:
+  /getpic:
+    get:
+      consumes:
+      - application/json
+      description: 获取图片
+      operationId: /getpic
+      parameters:
+      - description: 当前页数
+        in: query
+        name: page
+        required: true
+        type: integer
+      - description: 每页个数
+        in: query
+        name: page_size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "1000":
+          description: success
+          schema:
+            $ref: '#/definitions/models.ResponseData'
+      summary: 获取图片
+      tags:
+      - 获取图片
+swagger: "2.0"
