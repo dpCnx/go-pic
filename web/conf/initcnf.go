@@ -41,7 +41,7 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-	cfg, err = ini.Load(filepath.Join(dir, "conf", "app.conf"))
+	cfg, err = ini.Load(filepath.Join(dir, "web/conf", "app.conf"))
 	if err != nil {
 		panic(err)
 	}

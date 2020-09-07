@@ -60,7 +60,7 @@ func getLogWriter() zapcore.WriteSyncer {
 
 func getErrLogWriter() zapcore.WriteSyncer {
 	lumberJackLogger := &lumberjack.Logger{
-		Filename:   "./log/err.log",
+		Filename:   "./web/log/err.log",
 		MaxSize:    1,    // 日志文件大小 单位：MB
 		MaxBackups: 1,    // 备份数量
 		MaxAge:     1,    // 备份时间 单位：天
