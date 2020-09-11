@@ -14,8 +14,13 @@ func LoadRouter() *gin.Engine {
 
 	gin.SetMode(conf.C.Server.Mode)
 
-	r := gin.New()
-	r.Use(middleware.RequestLog())
+	/*	r := gin.New()
+		r.Use(middleware.GinRecovery())
+		r.Use(middleware.Limiter())
+		r.Use(middleware.RequestLog())*/
+
+	r := gin.Default()
+	r.Use(middleware.TokenRateLimiter())
 
 	docs.SwaggerInfo.Title = "Api"
 	docs.SwaggerInfo.Description = "api文档"
