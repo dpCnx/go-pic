@@ -2,6 +2,7 @@ package log
 
 import (
 	"github.com/natefinch/lumberjack"
+	"go-pic/conf"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"os"
@@ -60,11 +61,11 @@ func getLogWriter() zapcore.WriteSyncer {
 
 func getErrLogWriter() zapcore.WriteSyncer {
 	lumberJackLogger := &lumberjack.Logger{
-		Filename:   "./web/log/err.log",
-		MaxSize:    1,    // 日志文件大小 单位：MB
-		MaxBackups: 1,    // 备份数量
-		MaxAge:     1,    // 备份时间 单位：天
-		Compress:   true, // 是否压缩
+		Filename:   conf.C.Log.Filename,
+		MaxSize:    conf.C.Log.MaxSize,    // 日志文件大小 单位：MB
+		MaxBackups: conf.C.Log.MaxBackups, // 备份数量
+		MaxAge:     conf.C.Log.MaxAge,     // 备份时间 单位：天
+		Compress:   true,                  // 是否压缩
 	}
 
 	return zapcore.AddSync(lumberJackLogger)
