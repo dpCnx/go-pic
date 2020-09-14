@@ -19,8 +19,8 @@ type Config struct {
 }
 
 type ServerConfig struct {
+	Ip   string `ini:"ip"`
 	Port string `ini:"port"`
-	Mode string `ini:"mode"`
 }
 
 type MySQLConfig struct {
@@ -49,7 +49,8 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-	cfg, err = ini.Load(filepath.Join(dir, "web/conf", "app.conf"))
+
+	cfg, err = ini.Load(filepath.Join(dir, "/conf", "app.conf"))
 	if err != nil {
 		panic(err)
 	}

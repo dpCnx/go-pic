@@ -13,8 +13,6 @@ var (
 
 type Config struct {
 	Server ServerConfig `ini:"server"`
-	MySQL  MySQLConfig  `ini:"mysql"`
-	Redis  RedisConfig  `ini:"redis"`
 	Log    LogConfig    `ini:"log"`
 }
 
@@ -22,20 +20,6 @@ type ServerConfig struct {
 	Port string `ini:"port"`
 	Mode string `ini:"mode"`
 }
-
-type MySQLConfig struct {
-	IP       string `ini:"ip"`
-	Port     string `ini:"port"`
-	User     string `ini:"user"`
-	Password string `ini:"password"`
-	Database string `ini:"database"`
-}
-
-type RedisConfig struct {
-	IP   string `ini:"ip"`
-	Port string `ini:"port"`
-}
-
 type LogConfig struct {
 	Filename   string `ini:"filename"`
 	MaxSize    int    `ini:"max_size"`

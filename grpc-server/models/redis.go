@@ -3,7 +3,8 @@ package models
 import (
 	"fmt"
 	"github.com/go-redis/redis"
-	"go-pic/conf"
+	"go.uber.org/zap"
+	"grpc-server/conf"
 	"time"
 )
 
@@ -17,10 +18,12 @@ func init() {
 		Addr: fmt.Sprintf("%s:%s", conf.C.Redis.IP, conf.C.Redis.Port),
 	})
 
-	/*	_, err := redisDb.Ping().Result()
-		if err != nil {
-			panic(err)
-		}*/
+	_, err := redisDb.Ping().Result()
+	if err != nil {
+		panic(err)
+	}
+
+	zap.L().Info("pic-server redis start...")
 }
 
 func RsetString(key string, value interface{}, min int) error {

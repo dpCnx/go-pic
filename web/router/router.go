@@ -7,7 +7,6 @@ import (
 	"go-pic/conf"
 	"go-pic/controller"
 	"go-pic/docs"
-	"go-pic/middleware"
 )
 
 func LoadRouter() *gin.Engine {
@@ -20,7 +19,6 @@ func LoadRouter() *gin.Engine {
 		r.Use(middleware.RequestLog())*/
 
 	r := gin.Default()
-	r.Use(middleware.TokenRateLimiter())
 
 	docs.SwaggerInfo.Title = "Api"
 	docs.SwaggerInfo.Description = "api文档"

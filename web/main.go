@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"go-pic/conf"
 	_ "go-pic/log"
-	"go-pic/models"
 	"go-pic/router"
 	"go.uber.org/zap"
 	"net/http"
@@ -43,8 +42,6 @@ func main() {
 		zap.L().Error(err.Error())
 		return
 	}
-
-	models.CloseRdb()
 
 	zap.L().Info("退出go-pic...")
 }
