@@ -37,7 +37,12 @@ func GetPic(c *gin.Context) {
 	}
 
 	p := &models.Pic{}
-	p.QuarkPic(page, pageSize)
+	res, err := p.QuarkPic(page, pageSize)
+	if err != nil {
+		zap.L().Error(err.Error())
+		models.ResponseError(c, models.CodeServerBusy)
+		return
+	}
 
-	models.ResponseSuccess(c, "pic")
+	models.ResponseSuccess(c, res)
 }

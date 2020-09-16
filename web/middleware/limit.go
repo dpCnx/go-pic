@@ -22,3 +22,4 @@ func Limiter() gin.HandlerFunc {
 		//prev = now                 // 这里不需要, 只是打印下多次请求之间的时间间隔
 	}
 }
+

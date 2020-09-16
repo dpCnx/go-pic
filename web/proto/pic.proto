@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package pic_proto;
+
+service PicServer {
+    rpc GetPics (RequestPic) returns (ResposePic) {
+    }
+}
+
+message RequestPic {
+    int32 page = 1;
+    int32 page_size = 2;
+}
+
+message ResposePic {
+    repeated string pics = 1;
+}

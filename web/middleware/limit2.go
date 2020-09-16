@@ -1,27 +1,23 @@
 package middleware
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/juju/ratelimit"
-	"log"
-	"net/http"
+	"go-pic/models"
 	"time"
 )
 
-var limiter = ratelimit.NewBucketWithQuantum(time.Second, 1, 1)
-
 func TokenRateLimiter() gin.HandlerFunc {
-	fmt.Println("token create rate:", limiter.Rate())
-	fmt.Println("available token :", limiter.Available())
-	return func(context *gin.Context) {
-		if limiter.TakeAvailable(1) == 0 {
-			log.Printf("available token :%d", limiter.Available())
-			context.AbortWithStatusJSON(http.StatusTooManyRequests, "Too Many Request")
-		} else {
-			context.Writer.Header().Set("X-RateLimit-Remaining", fmt.Sprintf("%d", limiter.Available()))
-			context.Writer.Header().Set("X-RateLimit-Limit", fmt.Sprintf("%d", limiter.Capacity()))
-			context.Next()
+
+	bucket := ratelimit.NewBucket(time.Second, 1)
+	return func(c *gin.Context) {
+		// 如果取不到令牌就返回响应
+		if bucket.TakeAvailable(1) == 0 {
+			models.ResponseErrorWithMsg(c, models.CodeServerBusy, "rate limit")
+			c.Abort()
+			return
 		}
+		c.Next()
 	}
+
 }

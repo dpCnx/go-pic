@@ -13,7 +13,13 @@ var (
 
 type Config struct {
 	Server ServerConfig `ini:"server"`
+	Grpc   GrpcConfig   `ini:"grpc"`
 	Log    LogConfig    `ini:"log"`
+}
+
+type GrpcConfig struct {
+	Ip   string `ini:"ip"`
+	Port string `ini:"port"`
 }
 
 type ServerConfig struct {
