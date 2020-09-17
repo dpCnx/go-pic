@@ -15,6 +15,7 @@ type Config struct {
 	Server ServerConfig `ini:"server"`
 	MySQL  MySQLConfig  `ini:"mysql"`
 	Redis  RedisConfig  `ini:"redis"`
+	Etcd   EtcdConfig   `ini:"etcd"`
 	Log    LogConfig    `ini:"log"`
 }
 
@@ -32,6 +33,11 @@ type MySQLConfig struct {
 }
 
 type RedisConfig struct {
+	IP   string `ini:"ip"`
+	Port string `ini:"port"`
+}
+
+type EtcdConfig struct {
 	IP   string `ini:"ip"`
 	Port string `ini:"port"`
 }

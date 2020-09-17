@@ -19,8 +19,11 @@ func main() {
 	r := router.LoadRouter()
 
 	srv := &http.Server{
-		Addr:    fmt.Sprintf(":%s", conf.C.Server.Port),
-		Handler: r,
+		Addr:           fmt.Sprintf(":%s", conf.C.Server.Port),
+		Handler:        r,
+		ReadTimeout:    10 * time.Second,
+		WriteTimeout:   10 * time.Second,
+		MaxHeaderBytes: 1 << 20,
 	}
 
 	go func() {
@@ -35,6 +38,7 @@ func main() {
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
 	zap.L().Info("正在关闭go-pic...")
+
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 

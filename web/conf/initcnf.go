@@ -14,6 +14,7 @@ var (
 type Config struct {
 	Server ServerConfig `ini:"server"`
 	Grpc   GrpcConfig   `ini:"grpc"`
+	Etcd   EtcdConfig   `ini:"etcd"`
 	Log    LogConfig    `ini:"log"`
 }
 
@@ -26,6 +27,12 @@ type ServerConfig struct {
 	Port string `ini:"port"`
 	Mode string `ini:"mode"`
 }
+
+type EtcdConfig struct {
+	IP   string `ini:"ip"`
+	Port string `ini:"port"`
+}
+
 type LogConfig struct {
 	Filename   string `ini:"filename"`
 	MaxSize    int    `ini:"max_size"`
@@ -39,7 +46,7 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
-	cfg, err = ini.Load(filepath.Join(dir, "web/conf", "app.conf"))
+	cfg, err = ini.Load(filepath.Join(dir, "/conf", "app.conf"))
 	if err != nil {
 		panic(err)
 	}
