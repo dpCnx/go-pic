@@ -23,6 +23,8 @@ func main() {
 
 	addr := fmt.Sprintf("%s:%s", conf.C.Server.Ip, conf.C.Server.Port)
 
+	zap.L().Info(addr)
+
 	lis, err := net.Listen("tcp", addr)
 
 	if err != nil {

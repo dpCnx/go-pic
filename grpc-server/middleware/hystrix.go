@@ -5,8 +5,6 @@ import (
 	"github.com/afex/hystrix-go/hystrix"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
-	"net"
-	"net/http"
 )
 
 func init() {
@@ -20,11 +18,11 @@ func init() {
 
 	hystrixStreamHandler := hystrix.NewStreamHandler()
 	hystrixStreamHandler.Start()
-	go func() {
+	/*go func() {
 		if err := http.ListenAndServe(net.JoinHostPort("", "2001"), hystrixStreamHandler); err != nil {
 			zap.L().Error(err.Error())
 		}
-	}()
+	}()*/
 }
 
 func Hystrix(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {

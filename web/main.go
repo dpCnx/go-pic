@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"go-pic/conf"
+	_ "go-pic/etcd"
 	_ "go-pic/log"
 	"go-pic/router"
 	"go.uber.org/zap"
