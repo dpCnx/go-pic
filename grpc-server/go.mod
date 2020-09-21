@@ -24,6 +24,8 @@ require (
 	gorm.io/gorm v1.20.1
 )
 
+replace github.com/coreos/go-systemd => github.com/coreos/go-systemd/v22 v22.0.0
+
 replace github.com/coreos/bbolt v1.3.5 => go.etcd.io/bbolt v1.3.5
 
 replace google.golang.org/grpc v1.32.0 => google.golang.org/grpc v1.26.0
