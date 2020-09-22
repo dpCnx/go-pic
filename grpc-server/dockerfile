@@ -19,7 +19,4 @@ RUN go mod download
 # 将代码复制到容器中
 COPY . .
 
-# 将我们的代码编译成二进制可执行文件 
-RUN go build -o grpc .
-
-ENTRYPOINT ["/grpc"]
+ENTRYPOINT ["go","run","main.go"]

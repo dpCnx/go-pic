@@ -5,12 +5,27 @@ services:
     restart: always
     container_name: etcd
     network_mode: bridge
+    command:
+    - /usr/local/bin/etcd
+    - --data-dir=/etcd-data
+    - --name
+    - node1
+    - --initial-advertise-peer-urls
+    - http://0.0.0.0:2380
+    - --listen-peer-urls
+    - http://0.0.0.0:2380
+    - --advertise-client-urls
+    - http://0.0.0.0:2379
+    - --listen-client-urls
+    - http://0.0.0.0:2379
+    - --initial-cluster
+    - node1=http://0.0.0.0:2380
     ports:
       - 2379
       - 2380
   grpc:
     container_name: grpc
-    build: ./grpc
+    build: ./grpc-server
     restart: always
     network_mode: bridge
     ports:
