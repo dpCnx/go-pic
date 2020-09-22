@@ -32,6 +32,11 @@ func init() {
 		return
 	}
 
+	if client == nil {
+		zap.L().Error(err.Error())
+		return
+	}
+
 	etcdRespose, err := getServerToEtcd()
 	if err != nil {
 		zap.L().Error(err.Error())
@@ -58,7 +63,12 @@ func getServerToEtcd() (getRespose *clientv3.GetResponse, err error) {
 
 	kv := clientv3.NewKV(client)
 
-	getRespose, err = kv.Get(context.Background(), "/"+GrpcServer+"/", clientv3.WithPrefix())
+	if kv == nil {
+		return
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+	getRespose, err = kv.Get(ctx, "/"+GrpcServer+"/", clientv3.WithPrefix())
 	if err != nil {
 		return
 	}
