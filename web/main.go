@@ -49,3 +49,15 @@ func main() {
 
 	zap.L().Info("退出go-pic...")
 }
+
+/*
+	https://blog.csdn.net/raogeeg/article/details/86743953 gin使用swag
+	https://www.tizi365.com/archives/288.html  gin使用session
+*/
+
+/*
+	在项目执行 swag init
+	执行 go run main.go
+	进入 http://127.0.0.1:8080/swagger/index.html 查看文档
+*/
+
