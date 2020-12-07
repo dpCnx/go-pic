@@ -3,9 +3,9 @@ package middleware
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"go-pic/models"
 	"go.uber.org/zap"
 	"runtime/debug"
+	"web/models"
 )
 
 // GinRecovery recover掉项目可能出现的panic

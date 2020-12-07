@@ -4,21 +4,22 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
-	"go-pic/conf"
-	"go-pic/controller"
-	"go-pic/docs"
+	"web/conf"
+	"web/controller"
+	"web/docs"
+	"web/middleware"
 )
 
 func LoadRouter() *gin.Engine {
 
 	gin.SetMode(conf.C.Server.Mode)
 
-	/*	r := gin.New()
-		r.Use(middleware.GinRecovery())
-		r.Use(middleware.Limiter())
-		r.Use(middleware.RequestLog())*/
+	r := gin.New()
+	r.Use(middleware.GinRecovery())
+	r.Use(middleware.RequestLog())
+	r.Use(middleware.Sentinel())
 
-	r := gin.Default()
+	//r := gin.Default()
 
 	docs.SwaggerInfo.Title = "Api"
 	docs.SwaggerInfo.Description = "api文档"

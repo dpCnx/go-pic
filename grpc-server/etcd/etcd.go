@@ -3,7 +3,7 @@ package etcd
 import (
 	"context"
 	"fmt"
-	"go.etcd.io/etcd/clientv3"
+	"github.com/coreos/etcd/clientv3"
 	"grpc-server/conf"
 	"time"
 )
@@ -39,7 +39,6 @@ func RegisterServerToEtcd(addr string) (err error) {
 	if err != nil {
 		return
 	}
-
 
 	return
 }

@@ -2,15 +2,15 @@ package log
 
 import (
 	"github.com/natefinch/lumberjack"
-	"go-pic/conf"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"os"
+	"web/conf"
 )
 
 func init() {
 
-	//writeSyncer := getLogWriter()
+	writeSyncer := getLogWriter()
 	errWriteSyncer := getErrLogWriter()
 	encoder := getEncoder()
 
@@ -18,13 +18,21 @@ func init() {
 	level.SetLevel(zap.DebugLevel)
 	var core zapcore.Core
 
+	highPriority := zap.LevelEnablerFunc(func(lev zapcore.Level) bool {
+		return lev >= zap.ErrorLevel
+	})
+
+	lowPriority := zap.LevelEnablerFunc(func(lev zapcore.Level) bool {
+		return lev < zap.ErrorLevel && lev >= zap.DebugLevel
+	})
+
 	// NewTee 可以指定多个日志配置
 	core = zapcore.NewTee(
-		//zapcore.NewCore(encoder, writeSyncer, zapcore.InfoLevel),
+		zapcore.NewCore(encoder, writeSyncer, lowPriority),
 		// 创建一个将debug级别以上的日志输出到终端的配置信息
 		zapcore.NewCore(encoder, zapcore.AddSync(os.Stderr), level),
 		// 将error级别以上的日志输出到err文件
-		zapcore.NewCore(encoder, errWriteSyncer, zapcore.InfoLevel),
+		zapcore.NewCore(encoder, errWriteSyncer, highPriority),
 	)
 
 	logger := zap.New(core, zap.AddCaller()) // 根据上面的配置创建logger

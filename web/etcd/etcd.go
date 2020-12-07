@@ -3,12 +3,12 @@ package etcd
 import (
 	"context"
 	"fmt"
+	"github.com/coreos/etcd/clientv3"
 	"github.com/coreos/etcd/mvcc/mvccpb"
-	"go-pic/balance"
-	"go-pic/conf"
-	"go.etcd.io/etcd/clientv3"
 	"go.uber.org/zap"
 	"time"
+	"web/balance"
+	"web/conf"
 )
 
 const GrpcServer = "GrpcServer"

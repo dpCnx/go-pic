@@ -3,15 +3,15 @@ package main
 import (
 	"context"
 	"fmt"
-	"go-pic/conf"
-	_ "go-pic/log"
-	"go-pic/router"
 	"go.uber.org/zap"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
+	"web/conf"
+	_ "web/log"
+	"web/router"
 )
 
 func main() {
@@ -60,4 +60,3 @@ func main() {
 	执行 go run main.go
 	进入 http://127.0.0.1:8080/swagger/index.html 查看文档
 */
-

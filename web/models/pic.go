@@ -2,10 +2,10 @@ package models
 
 import (
 	"context"
-	"go-pic/etcd"
-	picproto "go-pic/proto"
 	"google.golang.org/grpc"
 	"time"
+	"web/etcd"
+	picproto "web/proto"
 )
 
 type Pic struct {

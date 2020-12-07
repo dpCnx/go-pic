@@ -2,9 +2,10 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
-	"go-pic/models"
 	"go.uber.org/zap"
 	"strconv"
+	"time"
+	"web/models"
 )
 
 // GetPic godoc
@@ -34,6 +35,10 @@ func GetPic(c *gin.Context) {
 		zap.L().Error(err.Error())
 		models.ResponseError(c, models.CodeInvalidParams)
 		return
+	}
+
+	if page == 2 {
+		time.Sleep(800 * time.Millisecond)
 	}
 
 	p := &models.Pic{}

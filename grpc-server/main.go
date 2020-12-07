@@ -35,7 +35,6 @@ func main() {
 		grpcmiddleware.WithUnaryServerChain(
 			middleware.Recovery,
 			middleware.RequestLog,
-			middleware.Hystrix,
 		),
 	}
 

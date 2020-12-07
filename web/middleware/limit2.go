@@ -3,8 +3,8 @@ package middleware
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/juju/ratelimit"
-	"go-pic/models"
 	"time"
+	"web/models"
 )
 
 func TokenRateLimiter() gin.HandlerFunc {
